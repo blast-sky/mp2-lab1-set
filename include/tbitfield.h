@@ -13,6 +13,8 @@ typedef unsigned int uint;
 class TBitField
 {
 private:
+    static constexpr size_t typeBitSize = sizeof(uint) * 8;
+
     size_t bitLen;   // длина битового поля - макс. к-во битов
     uint *pMem;      // память для представления битового поля
     size_t memLen;   // к-во эл-тов uint для представления бит.поля //длина массива pMem
