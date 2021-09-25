@@ -313,3 +313,31 @@ TEST(TSet, testCoutInsClearPlusMinus)
     set1 = set1 - 1;
     EXPECT_EQ(expSet, set1 + set + set1);
 }
+
+// new tests
+
+TEST(TSet, complex_test)
+{
+    TSet set1(100);
+    TSet set2(100);
+    TSet set3(100);
+
+    EXPECT_EQ(set1, set2, set3);
+
+    set1.insElem(4);
+
+    set2 = set1;
+
+    set3 = set3 + 4;
+
+    EXPECT_EQ(set1, set2, set3);
+
+    set1.insElem(5);
+    set2.insElem(6);
+
+    EXPECT_EQ(set1 + set2, set3 + 5 + 6);
+
+    EXPECT_EQ(set1 * set2, set3);
+
+    EXPECT_EQ(set1, set1 + set1 + set1);
+}

@@ -272,3 +272,70 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
 
     EXPECT_NE(bf1, bf2);
 }
+
+// new tests
+
+TEST(TBitField, new_bitfield_is_clear)
+{
+    TBitField field(100);
+
+    size_t sum = 0;
+    for (size_t i = 0; i < field.getLength(); ++i)
+        sum += field.getBit(i);
+
+    EXPECT_EQ(sum, 0);
+}
+
+TEST(TBitField, compare_equal_bitfields_of_non_equal_size)
+{
+    TBitField bf1(5), bf2(10);
+
+    bf1.setBit(4);
+    bf2.setBit(4);
+
+    EXPECT_EQ(bf1, bf2);
+}
+
+TEST(TBitField, compare_large_equal_bitfields_of_non_equal_size)
+{
+    TBitField bf1(33), bf2(144);
+
+    bf1.setBit(20);
+    bf1.setBit(32);
+    bf2.setBit(20);
+    bf2.setBit(32);
+
+    EXPECT_EQ(bf1, bf2);
+}
+
+TEST(TBitField, bitfield_istream)
+{
+    std::string string = "0 0 1 1 0 1 0 1";
+    std::stringstream inputStream(string);
+
+    TBitField field(8);
+    TBitField finalFiels(8);
+
+    for (size_t i = 0; i < finalFiels.getLength(); ++i)
+        if (string[i * 2] == '1')
+            finalFiels.setBit(i);
+
+    inputStream >> field;
+
+    EXPECT_EQ(finalFiels, field);
+}
+
+TEST(TBitField, bitfield_ostream)
+{
+    std::string string = "00110101";
+    std::stringstream outputStream;
+
+    TBitField field(8);
+    for (size_t i = 0; i < field.getLength(); ++i)
+        if (string[i] == '1')
+            field.setBit(i);
+
+    outputStream << field;
+
+    EXPECT_EQ(outputStream.str(), string);
+}

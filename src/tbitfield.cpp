@@ -178,7 +178,7 @@ TBitField TBitField::operator~() // отрицание
 
 TBitField::~TBitField()
 {
-    delete pMem;
+    delete[] pMem;
 }
 
 // ввод/вывод
