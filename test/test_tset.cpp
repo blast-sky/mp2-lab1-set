@@ -322,7 +322,8 @@ TEST(TSet, complex_test)
     TSet set2(100);
     TSet set3(100);
 
-    EXPECT_EQ(set1, set2, set3);
+    EXPECT_EQ(set1, set2);
+    EXPECT_EQ(set3, set2);
 
     set1.insElem(4);
 
