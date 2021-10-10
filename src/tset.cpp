@@ -36,7 +36,7 @@ size_t TSet::getMaxPower() const // получить макс. к-во эл-то
     return maxPower;
 }
 
-bool TSet::isMember(const uint elem) const // элемент множества?
+bool TSet::isMember(const elType elem) const // элемент множества?
 {
     if (elem >= maxPower)
         throw std::out_of_range("isMember");
@@ -44,7 +44,7 @@ bool TSet::isMember(const uint elem) const // элемент множества?
     return bitField.getBit(elem);
 }
 
-void TSet::insElem(const uint elem) // включение элемента множества
+void TSet::insElem(const elType elem) // включение элемента множества
 {
     if (elem >= maxPower)
         throw std::out_of_range("insElem");
@@ -52,7 +52,7 @@ void TSet::insElem(const uint elem) // включение элемента мн�
     bitField.setBit(elem);
 }
 
-void TSet::delElem(const uint elem) // исключение элемента множества
+void TSet::delElem(const elType elem) // исключение элемента множества
 {
     if (elem >= maxPower)
         throw std::out_of_range("delElem");
@@ -61,14 +61,14 @@ void TSet::delElem(const uint elem) // исключение элемента м�
 }
 
 // теоретико-множественные операции
-TSet& TSet::operator=(const TSet &s) // присваивание
+TSet& TSet::operator=(const TSet& s) // присваивание
 {
     maxPower = s.maxPower;
     bitField = s.bitField;
     return *this;
 }
 
-bool TSet::operator==(const TSet &s) const // сравнение
+bool TSet::operator==(const TSet& s) const // сравнение
 {
     if (maxPower != s.maxPower)
         return false;
@@ -76,12 +76,12 @@ bool TSet::operator==(const TSet &s) const // сравнение
     return bitField == s.bitField;
 }
 
-bool TSet::operator!=(const TSet &s) const // сравнение
+bool TSet::operator!=(const TSet& s) const // сравнение
 {
     return !(*this == s);
 }
 
-TSet TSet::operator+(const TSet &s) // объединение
+TSet TSet::operator+(const TSet& s) // объединение
 {
     size_t maxMaxPower = std::max(maxPower, s.maxPower);
 
@@ -102,7 +102,7 @@ TSet TSet::operator+(const TSet &s) // объединение
     return result;
 }
 
-TSet TSet::operator+(const uint elem) // объединение с элементом
+TSet TSet::operator+(const elType elem) // объединение с элементом
 {
     size_t needMaxPower = maxPower;
     if (elem >= maxPower)
@@ -114,20 +114,20 @@ TSet TSet::operator+(const uint elem) // объединение с элемен�
     return result;
 }
 
-TSet TSet::operator-(const uint elem) // разность с элементом
+TSet TSet::operator-(const elType elem) // разность с элементом
 {
     TSet result = *this;
     result.delElem(elem);
     return result;
 }
 
-TSet TSet::operator*(const TSet &s) // пересечение
+TSet TSet::operator*(const TSet& s) // пересечение
 {
     size_t maxMaxPower = std::max(maxPower, s.maxPower);
     size_t minMaxPower = std::min(maxPower, s.maxPower);
 
     TSet result(maxMaxPower);
-    
+
     for (size_t i = 0; i < minMaxPower; ++i)
     {
         if (isMember(i) && s.isMember(i))

@@ -9,33 +9,33 @@
 #include "tbitfield.h"
 class TSet
 {
-private: 
-    size_t maxPower;    // максимальная мощность множества
-    TBitField bitField; // битовое поле для хранения характеристического вектора
+private:
+  size_t maxPower;    // максимальная мощность множества
+  TBitField bitField; // битовое поле для хранения характеристического вектора
 public:
-    TSet(size_t mp);
-    TSet(const TSet &s);       // конструктор копирования
-    TSet(const TBitField &bf); // конструктор преобразования типа
-    operator TBitField();      // преобразование типа к битовому полю
+  TSet(size_t mp);
+  TSet(const TSet &s);       // конструктор копирования
+  TSet(const TBitField &bf); // конструктор преобразования типа
+  operator TBitField();      // преобразование типа к битовому полю
 
-    // доступ к битам
-    size_t getMaxPower() const;           // максимальная мощность множества
-    void insElem(const uint elem);        // включить элемент в множество
-    void delElem(const uint elem);        // удалить элемент из множества
-    bool isMember(const uint elem) const; // проверить наличие элемента в множестве
+  // доступ к битам
+  size_t getMaxPower() const;           // максимальная мощность множества
+  void insElem(const elType elem);        // включить элемент в множество
+  void delElem(const elType elem);        // удалить элемент из множества
+  bool isMember(const elType elem) const; // проверить наличие элемента в множестве
 
-    // теоретико-множественные операции
-    bool operator==(const TSet &s) const; // сравнение
-    bool operator!=(const TSet &s) const; // сравнение
-    TSet& operator=(const TSet &s);  // присваивание
-    TSet operator+(const uint elem); // объединение с элементом
-                                    // элемент должен быть из того же универса
-    TSet operator-(const uint elem); // разность с элементом
-                                    // элемент должен быть из того же универса
-    TSet operator+(const TSet &s);   // объединение
-    TSet operator*(const TSet &s);   // пересечение
-    TSet operator~();                // дополнение
+  // теоретико-множественные операции
+  bool operator==(const TSet &s) const; // сравнение
+  bool operator!=(const TSet &s) const; // сравнение
+  TSet& operator=(const TSet &s);  // присваивание
+  TSet operator+(const elType elem); // объединение с элементом
+                                   // элемент должен быть из того же универса
+  TSet operator-(const elType elem); // разность с элементом
+                                   // элемент должен быть из того же универса
+  TSet operator+(const TSet &s);   // объединение
+  TSet operator*(const TSet &s);   // пересечение
+  TSet operator~();                // дополнение
 
-    friend std::istream &operator>>(std::istream &istr, TSet &bf);
-    friend std::ostream &operator<<(std::ostream &ostr, const TSet &bf);
+  friend std::istream &operator>>(std::istream &istr, TSet &bf);
+  friend std::ostream &operator<<(std::ostream &ostr, const TSet &bf);
 };

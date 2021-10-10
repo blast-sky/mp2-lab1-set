@@ -36,7 +36,7 @@ TEST(TBitField, can_set_bit)
 TEST(TBitField, can_clear_bit)
 {
     TBitField bf(10);
-    uint bitIdx = 3;
+    elType bitIdx = 3;
 
     bf.setBit(bitIdx);
     EXPECT_NE(false, bf.getBit(bitIdx));
@@ -216,7 +216,7 @@ TEST(TBitField, can_invert_large_bitfield)
 
 TEST(TBitField, invert_plus_and_operator_on_different_size_bitfield)
 {
-    const uint firstSze = 4, secondSize = 8;
+    const elType firstSze = 4, secondSize = 8;
     TBitField firstBf(firstSze), negFirstBf(firstSze), secondBf(secondSize), testBf(secondSize);
     // firstBf = 0001
     firstBf.setBit(0);
@@ -238,7 +238,7 @@ TEST(TBitField, can_invert_many_random_bits_bitfield)
     const size_t size = 38;
     TBitField bf(size), negBf(size), expNegBf(size);
 
-    std::vector<uint> bits;
+    std::vector<elType> bits;
     bits.push_back(0);
     bits.push_back(1);
     bits.push_back(14);

@@ -18,7 +18,7 @@ jobs:
         echo $PATH
         ls -a
         cd build/
-        cmake .. && make -j 4
+        cmake -DCMAKE_BUILD_TYPE=Release .. && make -j 2
         cd bin/
         ls -a
     - name: Run tests
