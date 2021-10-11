@@ -47,9 +47,14 @@ elType TBitField::getMask(const size_t n) const // битовая маска д�
 }
 
 // доступ к битам битового поля
-elType TBitField::getLength() const // получить длину (к-во битов)
+size_t TBitField::getLength() const // получить длину (к-во битов)
 {
     return bitLen;
+}
+
+size_t TBitField::getNumBytes() const // получить количество байт выделенной памяти
+{
+    return memLen * sizeof(elType);
 }
 
 void TBitField::setBit(const size_t n) // установить бит
