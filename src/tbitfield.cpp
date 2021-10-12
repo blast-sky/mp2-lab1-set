@@ -14,12 +14,15 @@ TBitField::TBitField(size_t len) :
     memLen(0),
     pMem(nullptr)
 {
-    memLen = getIndex(len - 1) + 1;
+    if (len != 0)
+    {
+        memLen = getIndex((len - 1)) + 1;
 
-    pMem = new elType[memLen];
+        pMem = new elType[memLen];
 
-    for (size_t i = 0; i < memLen; ++i)
-        pMem[i] = 0;
+        for (size_t i = 0; i < memLen; ++i)
+            pMem[i] = 0;
+    }
 }
 
 TBitField::TBitField(const TBitField& bf) : // конструктор копирования
@@ -43,7 +46,7 @@ elType TBitField::getMask(const size_t n) const // битовая маска д�
 {
     size_t offset = n % (sizeof(elType) * 8);
 
-    return 1 << offset;
+    return elType(1) << offset;
 }
 
 // доступ к битам битового поля
